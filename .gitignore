@@ -1,0 +1,73 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+venv/
+.env/
+.python-version
+
+# =========================
+# Jupyter
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# VS Code
+# =========================
+.vscode/
+
+# macOS
+.DS_Store
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Data files
+# =========================
+data/raw/
+data/temp/
+*.csv
+*.xlsx
+*.parquet
+
+# nếu muốn giữ sample data:
+!data/.gitkeep
+!data/sample.csv
+
+# =========================
+# Model artifacts
+# =========================
+model/
+*.pkl
+*.joblib
+*.h5
+*.pth
+
+# =========================
+# Streamlit
+# =========================
+.streamlit/
+
+# =========================
+# Test / cache
+# =========================
+.pytest_cache/
+.cache/
+.coverage
+htmlcov/
+
+# =========================
+# HuggingFace cache
+# =========================
+.cache/huggingface/
+.huggingface/
