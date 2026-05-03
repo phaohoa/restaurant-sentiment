@@ -9,36 +9,40 @@ import pandas as pd
 import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-CSV_PATH = "data/cleaned_reviews.csv"
 VECTORIZER_PATH = "model/vectorizer.pkl"
 
-
-def vectorize_data():
-    # 1. Load cleaned csv
-    df = pd.read_csv(CSV_PATH)
-
-    # 2. Extract X text
-    X_raw = df["cleaned_review"]
-
-    #3. Extract y label
-    y = df['label']
-
-    #4 Fit TF_IDF
-    # Convert cleaned text into TF-IDF features
+# create TfidfVectorizer
+# fit on texts
+# save vectorizer.pkl
+# return vectorizer
+def fit_vectorizer(texts):
+    #1. Create the TfidfVectorizer
     vectorizer = TfidfVectorizer()
-    X = vectorizer.fit_transform(X_raw)
 
-    # 5. Save vectorizer.pkl
-    # Use joblib to store the fitted vectorizer object.
+    #2. Fit on texts
+    vectorizer.fit(texts)
+
+    #3. Save vectorizer.pkl
     joblib.dump(vectorizer, VECTORIZER_PATH)
 
-    # print(type(X))
-    # print(X.shape)
+    return vectorizer
 
-    return X, y, vectorizer
+def transform_text(vectorizer, texts):
+    X = vectorizer.transform(texts)
+    return X
 
 def main():
-    vectorize_data()
+    texts = [
+        "quán ngon",
+        "quán dở",
+        "đồ ăn xuất sắc"
+    ]
+
+    vectorizer = fit_vectorizer(texts)
+    X = transform_text(vectorizer, texts)
+
+    print(type(X))
+    print(X.shape)
 
 if __name__ == "__main__":
     main()
