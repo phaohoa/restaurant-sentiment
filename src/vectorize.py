@@ -1,9 +1,5 @@
-# load cleaned csv
-# extract X text
-# extract y label
-# fit TF-IDF
-# return X, y, vectorizer
-# save vectorizer.pkl
+# fit
+# transform
 
 import pandas as pd
 import joblib
