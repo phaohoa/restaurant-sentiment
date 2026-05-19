@@ -32,6 +32,8 @@ def main():
     print("\n=== label count ===")
     print(df["label"].value_counts())
 
-
+    print(df[df["label"] == 0][["review"]].head())
+    print(df[df["label"] == 1][["review"]].head())
+    print(df[df["label"] == 2][["review"]].head())
 if __name__ == "__main__":
     main()
