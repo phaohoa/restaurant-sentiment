@@ -12,7 +12,9 @@ Flow: X→Logistic Regression→y^​
 Done
 ✓ Phase 12 — Realtime Prediction (predict.py)
 
+Done
 Phase 13 — Refactor & Project Structure
+
 Phase 14 — Improve Model Quality
 Phase 15 — Better Vectorization
 Phase 16 — Error Analysis

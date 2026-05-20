@@ -48,6 +48,7 @@ data/temp/
 # Model artifacts
 # =========================
 model/
+artifacts/
 *.pkl
 *.joblib
 *.h5
