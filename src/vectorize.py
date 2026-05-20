@@ -5,7 +5,7 @@ import pandas as pd
 import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-VECTORIZER_PATH = "model/vectorizer.pkl"
+VECTORIZER_PATH = "artifacts/vectorizer.pkl"
 
 # create TfidfVectorizer
 # fit on texts

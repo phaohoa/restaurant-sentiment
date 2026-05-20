@@ -10,13 +10,13 @@
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from vectorize import fit_vectorizer, transform_text
+from src.vectorize import fit_vectorizer, transform_text
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report
 import joblib
 
 CSV_PATH = "data/cleaned_reviews.csv"
-MODEL_PATH = "model/sentiment_model.pkl"
+MODEL_PATH = "artifacts/sentiment_model.pkl"
 
 def train():
     # 1. load cleaned csv

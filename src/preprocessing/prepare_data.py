@@ -1,5 +1,5 @@
-from load_data import load_data
-from preprocessing.clean import clean_text
+from src.data.load_data import load_data
+from src.preprocessing.clean import clean_text
 
 OUTPUT_PATH = "data/cleaned_reviews.csv"
 

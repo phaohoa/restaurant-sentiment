@@ -11,11 +11,11 @@
 
 import joblib
 
-from preprocessing.clean import clean_text
-from vectorize import transform_text
+from src.preprocessing.clean import clean_text
+from src.vectorize import transform_text
 
-MODEL_PATH = "model/sentiment_model.pkl"
-VECTORIZER_PATH = "model/vectorizer.pkl"
+MODEL_PATH = "artifacts/sentiment_model.pkl"
+VECTORIZER_PATH = "artifacts/vectorizer.pkl"
 
 def predict():
     # 1. load vectorizer.pkl (saved with joblib)
