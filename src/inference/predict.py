@@ -10,47 +10,62 @@
 # text → clean → vectorize → predict
 
 import joblib
-
 from src.preprocessing.clean import clean_text
 from src.vectorize import transform_text
 
+# Định nghĩa đường dẫn
 MODEL_PATH = "artifacts/sentiment_model.pkl"
 VECTORIZER_PATH = "artifacts/vectorizer.pkl"
 
-def predict():
-    # 1. load vectorizer.pkl (saved with joblib)
+# 1 & 2. Load model và vectorizer một lần duy nhất ở ngoài (Global)
+# Giúp tiết kiệm tài nguyên khi chạy thực tế hoặc làm API sau này
+try:
+    print("Loading models...")
     vectorizer = joblib.load(VECTORIZER_PATH)
-
-    # 2. load vectorizer.pkl (saved with joblib)        
     model = joblib.load(MODEL_PATH)
+    print("Models loaded successfully!")
+except Exception as e:
+    print(f"Error loading models: {e}")
 
-    # 3. receive input text
-    input_text = "Đồ ăn rất ngon nhưng giá lại quá đắt :)"
+def predict_sentiment(input_text: str):
+    """
+    Hàm nhận vào text thô và trả về kết quả dự đoán sentiment
+    """
+    # 4. Clean text
+    cleaned_text = clean_text(input_text)
 
-    # 4 clean text
-    text = clean_text(input_text)
+    # 5. Transform text to vector (Bọc trong list [cleaned_text] vì model nhận ma trận)
+    text_vector = transform_text(vectorizer, [cleaned_text])
 
-    # 5. transform text to vector
-    text_vector = transform_text(vectorizer, [text])
-
-    # 6. predict sentiment
+    # 6. Predict sentiment label
     prediction = model.predict(text_vector)[0]  
 
-    # 7. convert label -> sentiment meaning
+    # 7. Convert label -> sentiment meaning (ĐÃ SỬA KHỚP VỚI TẬP TRAIN)
     label_mapping = {
         0: "Negative",
-        1: "Neutral",
-        2: "Positive"
+        1: "Positive",
+        2: "Neutral"
     }
 
-    sentiment = label_mapping.get(prediction, "Unknown")
-
-    # 8. print result
-    print(f"Original Text: {input_text}")
-    print(f"Predicted Sentiment: {sentiment}")
+    return label_mapping.get(prediction, "Unknown")
 
 def main():
-    predict()
+    # 3. Nhận input text
+    test_sentences = [
+        "Đồ ăn rất ngon",
+        "Phục vụ quá tệ, đồ ăn nguội ngắt",
+        "Cũng bình thường, không có gì đặc sắc"
+    ]
+    
+    # Chạy dự đoán
+    print("\n--- Test Results ---")
+    for text in test_sentences:
+        result = predict_sentiment(text)
+         # 8. Print result
+        print("-" * 30)
+        print(f"Original Text:  {text}")
+        print(f"Predicted Sign: {result}")
+        print("-" * 30) 
 
 if __name__ == "__main__":
     main()

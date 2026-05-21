@@ -41,7 +41,7 @@ def train():
     X_test = transform_text(vectorizer, X_test_raw)
 
     # 7. train Logistic Regression
-    model = LogisticRegression()
+    model = LogisticRegression(class_weight='balanced')
     model.fit(X_train, y_train)
 
     # 8 evaluate

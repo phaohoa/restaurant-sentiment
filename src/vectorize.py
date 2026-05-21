@@ -13,7 +13,13 @@ VECTORIZER_PATH = "artifacts/vectorizer.pkl"
 # return vectorizer
 def fit_vectorizer(texts):
     #1. Create the TfidfVectorizer
-    vectorizer = TfidfVectorizer()
+    # vectorizer = TfidfVectorizer()
+    vectorizer = TfidfVectorizer(
+                    ngram_range=(1, 2), #(Gom cụm từ)
+                    min_df=5, #(Lọc từ quá hiếm)
+                    max_df=0.8, #Lọc từ quá phổ biến
+                    max_features=20000 #(Giới hạn số lượng từ)
+                )
 
     #2. Fit on texts
     vectorizer.fit(texts)
