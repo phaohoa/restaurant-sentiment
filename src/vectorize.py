@@ -16,9 +16,10 @@ def fit_vectorizer(texts):
     # vectorizer = TfidfVectorizer()
     vectorizer = TfidfVectorizer(
                     ngram_range=(1, 2), #(Gom cụm từ)
-                    min_df=5, #(Lọc từ quá hiếm)
+                    min_df=2, #(Lọc từ quá hiếm)
                     max_df=0.8, #Lọc từ quá phổ biến
-                    max_features=20000 #(Giới hạn số lượng từ)
+                    max_features=20000, #(Giới hạn số lượng từ)
+                    sublinear_tf=True
                 )
 
     #2. Fit on texts
