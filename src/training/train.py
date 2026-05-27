@@ -13,6 +13,8 @@ from sklearn.model_selection import train_test_split
 from src.vectorize import fit_vectorizer, transform_text
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import LinearSVC
 import joblib
 
 CSV_PATH = "data/cleaned_reviews.csv"
@@ -41,13 +43,25 @@ def train():
     X_test = transform_text(vectorizer, X_test_raw)
 
     # 7. train Logistic Regression
-    model = LogisticRegression(class_weight='balanced')
-    model.fit(X_train, y_train)
+    lr_model = LogisticRegression()
+    train_model(lr_model, X_train, y_train)
+
+    nb_model = MultinomialNB()
+    train_model(nb_model, X_train, y_train)
+
+    svm_model = LinearSVC()
+    train_model(svm_model, X_train, y_train)
+
 
     # 8 evaluate
-    y_pred = model.predict(X_test)
+    # y_pred = evaluate_model("Logistic Regression", model=lr_model, X_test=X_test, y_test=y_test)
+    y_pred = evaluate_model("Logistic Regression",                  model=lr_model, X_test=X_test, y_test=y_test)
+    evaluate_model("Naive Bayes",                                   model=nb_model, X_test=X_test, y_test=y_test)
+    evaluate_model("Linear SVM",                                    model=svm_model, X_test=X_test, y_test=y_test)
 
-    # Tạo dataframe:
+
+
+    # Tạo dataframe:    
     results = pd.DataFrame({
         "text": X_test_raw,
         "actual": y_test,
@@ -62,11 +76,22 @@ def train():
     # print(errors.head(20))
     print(errors.sample(30, random_state=42))
 
-    print(f"Accuracy: {accuracy_score(y_test, y_pred):.4f}")
-    print("\nClassification Report:\n", classification_report(y_test, y_pred))
+    # 9. save model (best model with Accuracy) 
+    joblib.dump(lr_model, MODEL_PATH)
 
-    # 9. save model
-    joblib.dump(model, MODEL_PATH)
+def train_model(model, X_train, y_train):
+    model.fit(X_train, y_train)
+    return model
+
+def evaluate_model(model_name, model, X_test, y_test):
+    y_pred = model.predict(X_test)
+    print(f"\n===== {model_name} =====")
+
+    print(f"Accuracy: {accuracy_score(y_test, y_pred):.4f}")
+
+    print(classification_report(y_test, y_pred))
+
+    return y_pred
 
 def main():
     train()
