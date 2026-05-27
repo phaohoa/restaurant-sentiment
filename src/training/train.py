@@ -46,6 +46,22 @@ def train():
 
     # 8 evaluate
     y_pred = model.predict(X_test)
+
+    # Tạo dataframe:
+    results = pd.DataFrame({
+        "text": X_test_raw,
+        "actual": y_test,
+        "predicted": y_pred
+    })
+
+    # Lọc các mẫu sai:
+    errors = results[
+        results["actual"] != results["predicted"]
+    ]
+
+    # print(errors.head(20))
+    print(errors.sample(30, random_state=42))
+
     print(f"Accuracy: {accuracy_score(y_test, y_pred):.4f}")
     print("\nClassification Report:\n", classification_report(y_test, y_pred))
 

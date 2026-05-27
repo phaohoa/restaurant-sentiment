@@ -28,8 +28,12 @@ Phase 15 — Better Vectorization
     min_df: giảm noise, giảm overfitting
     max_features: giảm kích thước feature space, tăng tốc train, giảm noise
     Đo kết quả sau mỗi thay đổi: tham số mới tốt hơn, hay chỉ là cảm giác tốt hơn
-    
+
 Phase 16 — Error Analysis
+    Model sai ở đâu?
+    Tại sao sai?
+    Sai theo pattern nào?
+    
 Phase 17 — Interactive CLI App
 Phase 18 — REST API
 Phase 19 — Frontend Demo

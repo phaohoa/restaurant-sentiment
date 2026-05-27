@@ -9,7 +9,7 @@ df = pd.DataFrame(dataset["train"])
 
 for label in [0, 1, 2]:
     print(f"\n===== LABEL {label} =====")
-    samples = df[df["label"] == label]["review"].head(3)
+    samples = df[df["label"] == label]["review"].head(5)
 
     for i, text in enumerate(samples, 1):
         print(f"\n{i}. {text[:300]}...")
